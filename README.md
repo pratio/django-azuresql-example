@@ -17,6 +17,25 @@
 7. [Dockerized application](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/#postgres)
 8. [Using a docker alpine container with Azure SQL](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#alpine17)
 
+#### How to use
+1. Clone the repository
+2. Build the image with `docker build django-azuresql-example -t .`
+3. Run the image with the command below, grab the credentials from keepass
 
+```
+docker run -p 80:80
+-v django-azuresql-example/project/service:/project/service
+--env DJANGO_ALLOWED_HOSTS=*
+--env DEBUG=1
+--env DBNAME='nameofstagingdb'
+--env USER='username@nameofstagingdb'
+--env PASSWORD='password'
+--env HOST='hostnameofdb'
+--env DOMAIN='auth0dmain'
+--env KEY='clientid'
+--env SECRET='clientsecret'
+--name django-azuresql-example
+django-azuresql-example:latest python manage.py runserver 0.0.0.0:80
+```
 
 
